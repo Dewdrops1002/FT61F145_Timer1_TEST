@@ -1,0 +1,170 @@
+//Deviec:FT61F14X
+//-----------------------Variable---------------------------------
+//-----------------------Variable END---------------------------------
+
+		ORG		0000H
+		MOVLP 	0H 			//0000 	0180
+		LJUMP 	10H 			//0001 	3810
+		ORG		0004H
+		BSR 	7EH, 0H 			//0004 	247E
+		MOVLP 	0H 			//0005 	0180
+
+		//;FT61F145_Timer1.C: 17: if(T1UIE && T1UIF)
+		MOVLB 	4H 			//0006 	1024
+		BTSC 	15H, 0H 		//0007 	2815
+		BTSS 	16H, 0H 		//0008 	2C16
+		LJUMP 	EH 			//0009 	380E
+
+		//;FT61F145_Timer1.C: 18: {
+		//;FT61F145_Timer1.C: 19: T1UIF = 1;
+		BSR 	16H, 0H 			//000A 	2416
+
+		//;FT61F145_Timer1.C: 21: PB3 = !PB3;
+		LDWI 	8H 			//000B 	0008
+		MOVLB 	0H 			//000C 	1020
+		XORWR 	DH, 1H 		//000D 	168D
+		BCR 	7EH, 0H 			//000E 	207E
+		RETI 					//000F 	1009
+		MOVLP 	0H 			//0010 	0180
+		LJUMP 	12H 			//0011 	3812
+		BCR 	7EH, 0H 			//0012 	207E
+		MOVLB 	0H 			//0013 	1020
+		LJUMP 	15H 			//0014 	3815
+
+		//;FT61F145_Timer1.C: 31: configure();
+		LCALL 	1AH 			//0015 	301A
+		MOVLP 	0H 			//0016 	0180
+
+		//;FT61F145_Timer1.C: 32: timer1_Init();
+		LCALL 	43H 			//0017 	3043
+		MOVLP 	0H 			//0018 	0180
+
+		//;FT61F145_Timer1.C: 33: while(1)
+		//;FT61F145_Timer1.C: 34: {
+		LJUMP 	19H 			//0019 	3819
+
+		//;FT61F145_Timer1.C: 154: OSCCON = 0B01110001;
+		LDWI 	71H 			//001A 	0071
+		MOVLB 	1H 			//001B 	1021
+		STR 	19H 			//001C 	1099
+
+		//;FT61F145_Timer1.C: 155: INTCON = 0B01000000;
+		LDWI 	40H 			//001D 	0040
+		STR 	BH 			//001E 	108B
+
+		//;FT61F145_Timer1.C: 166: PORTA = 0B11111111;
+		LDWI 	FFH 			//001F 	00FF
+		MOVLB 	0H 			//0020 	1020
+		STR 	CH 			//0021 	108C
+
+		//;FT61F145_Timer1.C: 167: TRISA = 0x14;
+		LDWI 	14H 			//0022 	0014
+		MOVLB 	1H 			//0023 	1021
+		STR 	CH 			//0024 	108C
+
+		//;FT61F145_Timer1.C: 169: PORTB = 0B11111111;
+		LDWI 	FFH 			//0025 	00FF
+		MOVLB 	0H 			//0026 	1020
+		STR 	DH 			//0027 	108D
+
+		//;FT61F145_Timer1.C: 170: TRISB = 0x70;
+		LDWI 	70H 			//0028 	0070
+		MOVLB 	1H 			//0029 	1021
+		STR 	DH 			//002A 	108D
+
+		//;FT61F145_Timer1.C: 172: PORTC = 0B11111111;
+		LDWI 	FFH 			//002B 	00FF
+		MOVLB 	0H 			//002C 	1020
+		STR 	EH 			//002D 	108E
+
+		//;FT61F145_Timer1.C: 173: TRISC = 0B11111101;
+		LDWI 	FDH 			//002E 	00FD
+		MOVLB 	1H 			//002F 	1021
+		STR 	EH 			//0030 	108E
+
+		//;FT61F145_Timer1.C: 175: WPUA = 0B00000000;
+		MOVLB 	3H 			//0031 	1023
+		CLRF 	CH 			//0032 	118C
+
+		//;FT61F145_Timer1.C: 176: WPUB = 0B00000000;
+		CLRF 	DH 			//0033 	118D
+
+		//;FT61F145_Timer1.C: 177: WPUC = 0B00000000;
+		CLRF 	EH 			//0034 	118E
+
+		//;FT61F145_Timer1.C: 179: WPDA = 0B00000000;
+		MOVLB 	4H 			//0035 	1024
+		CLRF 	CH 			//0036 	118C
+
+		//;FT61F145_Timer1.C: 180: WPDB = 0B00000000;
+		CLRF 	DH 			//0037 	118D
+
+		//;FT61F145_Timer1.C: 181: WPDC = 0B00000000;
+		CLRF 	EH 			//0038 	118E
+
+		//;FT61F145_Timer1.C: 183: PSRC0 = 0B11111111;
+		LDWI 	FFH 			//0039 	00FF
+		MOVLB 	2H 			//003A 	1022
+		STR 	1AH 			//003B 	109A
+
+		//;FT61F145_Timer1.C: 184: PSRC1 = 0B11111111;
+		STR 	1BH 			//003C 	109B
+
+		//;FT61F145_Timer1.C: 186: PSINK0 = 0B11111111;
+		MOVLB 	3H 			//003D 	1023
+		STR 	1AH 			//003E 	109A
+
+		//;FT61F145_Timer1.C: 187: PSINK1 = 0B11111111;
+		STR 	1BH 			//003F 	109B
+
+		//;FT61F145_Timer1.C: 188: PSINK2 = 0B11111111;
+		STR 	1CH 			//0040 	109C
+
+		//;FT61F145_Timer1.C: 190: ANSELA = 0B00000000;
+		CLRF 	17H 			//0041 	1197
+		RET 					//0042 	1008
+
+		//;FT61F145_Timer1.C: 42: PCKEN |=0B00000010;
+		MOVLB 	1H 			//0043 	1021
+		BSR 	1AH, 1H 			//0044 	249A
+
+		//;FT61F145_Timer1.C: 43: CKOCON=0B00100000;
+		LDWI 	20H 			//0045 	0020
+		STR 	15H 			//0046 	1095
+
+		//;FT61F145_Timer1.C: 44: TCKSRC=0B00000011;
+		LDWI 	3H 			//0047 	0003
+		MOVLB 	6H 			//0048 	1026
+		STR 	1FH 			//0049 	109F
+
+		//;FT61F145_Timer1.C: 71: TIM1CR1 =0B10000101;
+		LDWI 	85H 			//004A 	0085
+		MOVLB 	4H 			//004B 	1024
+		STR 	11H 			//004C 	1091
+
+		//;FT61F145_Timer1.C: 110: TIM1IER =0B00000001;
+		LDWI 	1H 			//004D 	0001
+		STR 	15H 			//004E 	1095
+
+		//;FT61F145_Timer1.C: 143: TIM1ARRH =0x7C;
+		LDWI 	7CH 			//004F 	007C
+		MOVLB 	5H 			//0050 	1025
+		STR 	10H 			//0051 	1090
+
+		//;FT61F145_Timer1.C: 144: TIM1ARRL =0xFF;
+		LDWI 	FFH 			//0052 	00FF
+		STR 	11H 			//0053 	1091
+		ORG		0054H
+
+		//;FT61F145_Timer1.C: 146: TIM1PSCRH = 0x03;
+		LDWI 	3H 			//0054 	0003
+		STR 	EH 			//0055 	108E
+
+		//;FT61F145_Timer1.C: 147: TIM1PSCRL = 0xE7;
+		LDWI 	E7H 			//0056 	00E7
+		STR 	FH 			//0057 	108F
+
+		//;FT61F145_Timer1.C: 149: GIE=1;
+		BSR 	BH, 7H 			//0058 	278B
+		RET 					//0059 	1008
+			END
